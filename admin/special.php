@@ -2,19 +2,18 @@
 include_once('../includes/config.php');
 if (strlen($_SESSION['adminid']==0)) {
   header('location:logout.php');
-  } else{ 
+  } else{
 // for deleting user
 if(isset($_GET['id']))
 {
 $adminid=$_GET['id'];
-$msg=mysqli_query($con,"delete from children where id='$adminid'");
+$msg=mysqli_query($con,"delete from comments where id='$adminid'");
 if($msg)
 {
 echo "<script>alert('Data deleted');</script>";
 }
 }
-
-    ?>
+   ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -23,7 +22,7 @@ echo "<script>alert('Data deleted');</script>";
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Registration Result |SBCS</title>
+        <title>special cases| SBCS</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="../css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -36,86 +35,77 @@ echo "<script>alert('Data deleted');</script>";
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4"> Report Result</h1>
+                        <h1 class="mt-4">Manage special cases</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
                             <li class="breadcrumb-item active"></li>
                         </ol>
             
                         <div class="card mb-4">
-                            <div class="card-header" align="center" style="font-size:20px;">
+                            <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-<?php
-$fdate=$_POST['fromdate'];
-$tdate=$_POST['todate'];
-
-?>
-
-                              B/w Dates Report Result from <?php echo date("d-m-Y", strtotime($fdate));?> to <?php echo date("d-m-Y", strtotime($tdate));?>
+                                All received
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
                                              <th>Sno.</th>
-                                             <th>First  Name</th>
-                                  
-                                  <th>Other Names</th>
-                                  <th>First parent </th>
-                                  <th>second parent </th>
-                                  <th>born date</th>
+                                             <th>Sender</th>          
+                                  <th> Message</th>
+                               
+                                  <th>date received</th>
+                                  <th>replyin status</th>
+                                 
                                   <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                             <th>Sno.</th>
-                                             <th>First  Name</th>
-                                  
-                                  <th>Other Names</th>
-                                  <th>First parent </th>
-                                  <th>second parent </th>
-                                  <th>born date</th>
+                                        <th>Sno.</th>
+                                        <th>Sender</th>          
+                                  <th> Message</th>
+                               
+                                  <th>date received</th>
+                                 
                                   <th>Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-<?php $ret=mysqli_query($con,"select * from children where date(born) between '$fdate' and '$tdate'");
+                                              <?php $ret=mysqli_query($con,"select * from comments");
                               $cnt=1;
                               while($row=mysqli_fetch_array($ret))
                               {?>
                               <tr>
-                              <td><?php echo $cnt; $op=$row['id']?></td>
-                              
-                                  <td><?php echo $row['fname'];?></td>
-                                  <td><?php echo $row['oname'];?></td>
-                                  <td><?php  $par=$row['pid'];
+                              <td><?php echo $cnt;?></td>
                                   
-                                  $retr=mysqli_query($con,"select * from parents where id=$par");
-                              $cnt=1;
-                              while ($row1=mysqli_fetch_array($retr)) {
-                                  echo $row1['fname'] ." " .$row1 ['oname'];
-                              }
-                                
+
+
+                                  <td>
+                                  <?php $a=$row['sender'];?>
+                                      <?php $ret1=mysqli_query($con,"select * from parents where id=$a"); 
+                                  
+                                  while ($row1=mysqli_fetch_array($ret1)) {
+                                      echo  $row1['fname'];
+                                    
+                                      echo  $row1['oname'];
+                                  }
                                   
                                   ?></td>
-                                   <td><?php 
-                                   
-                                   $retr=mysqli_query($con,"select * from children where id=$op");
-                              $cnt=1;
-                              while ($row1=mysqli_fetch_array($retr)) {
-                                  echo $row1['par2'];
-                              }
-                                   
-                                   
-                                   ?></td>
-                                  <td><?php echo $row['born'];?></td>  
+
+
+
+                                  <td><?php echo $row['message'];?></td>
+                                  <td><?php echo $row['date'];?></td>
+                                  <td></td>
                                   <td>
                                      
-                                     <a href="user-profile.php?uid=<?php echo $row['id'];?>"> 
+                                     <a href="comments-profile.php?uid=<?php echo $row['id'];?>"> 
                           <i class="fas fa-edit"></i></a>
                                      <a href="manage-users.php?id=<?php echo $row['id'];?>" onClick="return confirm('Do you really want to delete');"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                      
                                   </td>
+
                               </tr>
                               <?php $cnt=$cnt+1; }?>
                                       

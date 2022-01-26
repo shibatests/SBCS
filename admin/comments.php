@@ -55,7 +55,7 @@ echo "<script>alert('Data deleted');</script>";
                                   <th> Message</th>
                                
                                   <th>date received</th>
-                                  <th>replyin status</th>
+                                
                                  
                                   <th>Action</th>
                                         </tr>

@@ -46,9 +46,9 @@ while($result=mysqli_fetch_array($query))
                                        <td><?php echo $result['oname'];?></td>
                                    </tr>
                                    <tr>
-                                       <th>parent</th>
+                                       
                                        <td colspan="3"><?php $b=$result['pid'];
-                                       echo $b;
+                                        $b;
                                        ?></td>
                                    </tr>
                                      
@@ -77,7 +77,10 @@ while($result=mysqli_fetch_array($query))
 $userid=$_GET['uid'];
 $query=mysqli_query($con,"select * from parents where id=$b");
 while($result=mysqli_fetch_array($query))
-{?>
+{
+    
+    $par2=$result['id'];
+    ?>
                         
                         <h1 class="mt-4"><?php echo $result['fname'];?>s' parents information</h1>
                         <div class="card mb-4">
@@ -86,13 +89,16 @@ while($result=mysqli_fetch_array($query))
                                 <!-- <a href="edit-profile.php?uid=<?php echo $result['id'];?>">Edit</a> -->
                                 <table class="table table-bordered">
                                    <tr>
-                                    <th>First Name</th>
-                                       <td><?php echo $result['fname'];?></td>
+                                    <th>Refferar parent</th>
+                                       <td><?php echo $result['fname']." ".$result['oname'];?></td>
                                    </tr>
-                                   <tr>
-                                       <th>other Name</th>
-                                       <td><?php echo $result['oname'];?></td>
+                                   <th>other parent</th>
+                                       <td>
+
+                                       
+                                       </td>
                                    </tr>
+                                  
                                    <tr>
                                        <th>parentIdNo</th>
                                        <td colspan="3"><?php echo $result['idno'];?></td>

@@ -54,7 +54,8 @@ echo "<script>alert('Data deleted');</script>";
                                              <th>firstname</th>          
                                   <th> Last Name</th>
                                
-                                  <th>parents</th>
+                                  <th>first parent</th>
+                                  <th>second parent</th>
                                   <th>born date</th>
                                   <th>Action</th>
                                         </tr>
@@ -65,7 +66,8 @@ echo "<script>alert('Data deleted');</script>";
                                              <th>firstname</th>          
                                   <th> Last Name</th>
                                   
-                                  <th>parent</th>
+                                  <th>first parent</th>
+                                  <th>second parent</th>
                                   <th>born date</th>
                                   <th>Action</th>
                                         </tr>
@@ -76,7 +78,7 @@ echo "<script>alert('Data deleted');</script>";
                               while($row=mysqli_fetch_array($ret))
                               {?>
                               <tr>
-                              <td><?php echo $cnt;?></td>
+                              <td><?php echo $cnt; $op=$row['id'];?></td>
                                   <td><?php echo $row['fname'];?></td>
                                   <td><?php echo $row['oname'];?></td>
                                   <td><?php $a=$row['pid'];
@@ -85,9 +87,16 @@ echo "<script>alert('Data deleted');</script>";
 
                                   while ($row1=mysqli_fetch_array($ret1)) {
                                       echo $row1['fname'];
+                                      echo " ";
                                       echo $row1['oname'];
                                   }
                                   ?></td>
+                                  <td><?php $retr=mysqli_query($con,"select * from children where id=$op");
+                              $cnt=1;
+                              while ($row1=mysqli_fetch_array($retr)) {
+                                  echo $row1['par2'];
+                              }
+                                ?></td>
                                     <td><?php echo $row['born'];?></td>
                                   <td>
                                      

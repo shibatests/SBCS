@@ -125,7 +125,7 @@ if($msg)
                                             
 
 <div class="mt-4 mb-0">
-<div class="d-grid"><button type="submit" class="btn btn-primary btn-block" name="submit">Add Event</button></div>
+<div class="d-grid"><button type="submit" class="btn btn-primary btn-block" name="submit">Add Vaccine</button></div>
 </div>
                                         </form>
                                     </div>

@@ -11,7 +11,7 @@
                  
                             <a class="nav-link" href="manage-users.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
-                                Manage Users
+                                Manage children
                             </a>
 
                             <a class="nav-link" href="addnew.php">
@@ -25,6 +25,8 @@
                             </a>
                             
                             </a>
+
+                           
 
                             <a class="nav-link" href="comments.php">
                                 <div class="sb-nav-link-icon"><i class="fa fa-calendar"></i></div>
